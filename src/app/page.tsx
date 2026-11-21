@@ -29,7 +29,7 @@ export default function Home() {
         id="lessons"
         data-section="paper"
         data-label="Lessons"
-        className="scroll-mt-20 py-24 sm:py-36"
+        className="scroll-mt-20 overflow-x-clip py-24 sm:py-36"
       >
         <Container className="grid gap-16 lg:grid-cols-12">
           <div className="lg:col-span-7">

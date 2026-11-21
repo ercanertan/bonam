@@ -39,6 +39,12 @@
     --page-fg: var(--color-ink);
   }
 
+  /* Nothing may widen the page sideways (clip keeps position: sticky working) */
+  html,
+  body {
+    overflow-x: clip;
+  }
+
   body {
     background-color: var(--page-bg);
     color: var(--page-fg);
