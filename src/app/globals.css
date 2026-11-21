@@ -1,26 +1,330 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/*
+ * Bonam brand: white + red, applied to the DESIGN.md / agencefoudre.com system.
+ * Role mapping from DESIGN.md:
+ *   Lipstick Magenta → red   · Forest Ink → ink   · Warm Chalk → paper
+ *   Blush Cream → mist       · Bubblegum → rose   · Cotton Pink → coral
+ */
+@theme {
+  --color-red: #e0302a; /* sampled from the Bonam logo */
+  --color-ink: #1b1212;
+  --color-paper: #ffffff;
+  --color-mist: #fff1ef;
+  --color-rose: #f7a39e;
+  --color-coral: #ec6a63;
+  --color-line: #f1e4e2;
+
+  --font-display: var(--font-anton), "Arial Narrow", Impact, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  --text-display: clamp(3.5rem, 17vw, 14.375rem);
+  --text-heading-lg: clamp(3.25rem, 10vw, 8.125rem);
+  --text-heading: clamp(3rem, 7.5vw, 5.875rem);
+  --text-heading-sm: clamp(2.5rem, 6vw, 5rem);
+  --text-subheading: clamp(2rem, 3.5vw, 2.875rem);
+
+  --radius-button: 10px;
+  --radius-card: 2rem;
+
+  --container-page: 1440px;
+
+  --ease-expo: cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-quint: cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer base {
+  html {
+    --page-bg: var(--color-paper);
+    --page-fg: var(--color-ink);
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  body {
+    background-color: var(--page-bg);
+    color: var(--page-fg);
+    font-family: var(--font-sans);
+    transition:
+      background-color 0.5s var(--ease-quint),
+      color 0.5s var(--ease-quint);
+  }
+
+  ::selection {
+    background: var(--color-red);
+    color: var(--color-paper);
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-red);
+    outline-offset: 3px;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Lenis smooth scroll */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis:not(.lenis-autoToggle).lenis-stopped {
+  overflow: clip;
+}
+.lenis [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+@layer components {
+  .display {
+    font-family: var(--font-display);
+    font-weight: 400;
+    line-height: 0.98;
+    text-transform: uppercase;
+  }
+
+  /* ---------- Word reveal: each word slides up out of a mask ---------- */
+  .rv-mask {
+    display: inline-flex;
+    overflow: hidden;
+    padding-block: 0.06em;
+    margin-block: -0.06em;
+    vertical-align: top;
+  }
+  .rv-word {
+    display: inline-block;
+    transform: translateY(120%);
+    transition: transform 1s var(--ease-expo) calc(var(--i, 0) * 45ms);
+  }
+  .is-inview .rv-word,
+  .is-inview.rv-word {
+    transform: none;
+  }
+
+  /* ---------- Fade/rise for blocks ---------- */
+  .rise {
+    opacity: 0;
+    transform: translateY(2.5rem);
+    transition:
+      opacity 0.8s var(--ease-quint) var(--delay, 0ms),
+      transform 1.2s var(--ease-expo) var(--delay, 0ms);
+  }
+  .rise.is-inview {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ---------- Giant logo letters (hero + footer) ---------- */
+  .logo-letter {
+    display: inline-block;
+    transform: translateY(100%);
+    transition: transform 1s var(--ease-expo) var(--delay, 0ms);
+  }
+  .is-loaded .hero .logo-letter,
+  .is-inview .logo-letter {
+    transform: none;
+  }
+  .hero .logo-letter {
+    transition-delay: calc(var(--delay, 0ms) + 150ms);
+  }
+
+  /* ---------- Hero logo lockup: rises, then the car line draws ---------- */
+  .hero-logo {
+    opacity: 0;
+    transform: translateY(1.5rem);
+    transition:
+      opacity 0.8s var(--ease-quint),
+      transform 1.2s var(--ease-expo);
+  }
+  .hero-logo path {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    transition: stroke-dashoffset 1.8s var(--ease-expo) 0.35s;
+  }
+  .is-loaded .hero .hero-logo {
+    opacity: 1;
+    transform: none;
+  }
+  .is-loaded .hero .hero-logo path {
+    stroke-dashoffset: 0;
+  }
+
+  /* ---------- Hero card stack (scroll-driven fan → stack) ---------- */
+  .hero-stack {
+    position: relative;
+    height: min(calc(100svh - 25rem), 36rem);
+    max-width: 100%;
+    aspect-ratio: 45 / 68;
+  }
+  .hero-card {
+    position: absolute;
+    inset: 0;
+    transform: translateY(150%);
+    transition: transform 2s var(--ease-quint);
+  }
+  .hero-card:first-child {
+    z-index: 2;
+  }
+  .hero-card:not(:first-child) .card-img {
+    transform: scale(0.75);
+  }
+  .is-loaded .hero-card:nth-child(1) {
+    transform: none;
+  }
+  .is-loaded .hero-card:nth-child(2) {
+    transform: translateX(calc(-80% * (1 - var(--progress, 0))))
+      rotate(calc(-3deg * (1 - var(--progress, 0))));
+  }
+  .is-loaded .hero-card:nth-child(3) {
+    transform: translateX(calc(80% * (1 - var(--progress, 0))))
+      rotate(calc(3deg * (1 - var(--progress, 0))));
+  }
+  .card-img {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    border-radius: var(--radius-card);
+    background: var(--color-mist);
+  }
+
+  /* ---------- Emoji chat bubbles ---------- */
+  .bubble-float {
+    position: absolute;
+    z-index: 5;
+    pointer-events: none;
+    animation: flap 8s ease-in-out infinite;
+  }
+  .bubble {
+    display: inline-grid;
+    place-items: center;
+    width: 4.5rem;
+    height: 4.5rem;
+    border-radius: 1.6rem;
+    font-size: 2.25rem;
+    line-height: 1;
+    background: var(--color-paper);
+    box-shadow: 0 0 0 3px var(--color-red);
+    transform: scale(0) rotate(var(--rot, 8deg));
+    transition: transform 0.4s var(--ease-quint) 0.1s;
+  }
+  .is-loaded .hero .bubble,
+  .is-inview .bubble {
+    transform: scale(1) rotate(var(--rot, 8deg));
+  }
+
+  /* ---------- 3D swing-in media panel ---------- */
+  .swing-stage {
+    perspective: 800px;
+  }
+  .swing {
+    transform: translateX(25%) translateZ(-60px) rotateY(90deg) scale(0.5);
+    transform-origin: right center;
+    transition: transform 0.8s var(--ease-quint);
+    backface-visibility: hidden;
+  }
+  .is-inview .swing {
+    transform: none;
+    transition: transform 2s var(--ease-expo);
+  }
+
+  /* ---------- Image pop (gallery cards) ---------- */
+  .pop {
+    transform: scale(0.6);
+    opacity: 0;
+    transition:
+      transform 1.2s var(--ease-expo) var(--delay, 0ms),
+      opacity 0.6s var(--ease-quint) var(--delay, 0ms);
+  }
+  .pop.is-inview {
+    transform: none;
+    opacity: 1;
+  }
+
+  /* ---------- Fixed section label (letters roll in) ---------- */
+  .label-letter {
+    display: inline-block;
+    animation: label-in 0.5s var(--ease-expo) both;
+    animation-delay: calc(var(--i) * 25ms);
+  }
+}
+
+@keyframes flap {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  25% {
+    transform: translateY(-7%);
+  }
+}
+
+@keyframes label-in {
+  from {
+    transform: translateY(110%);
+    opacity: 0;
+  }
+}
+
+/* ---------- Header theming per section ---------- */
+.nav-dot {
+  background: var(--color-red);
+  color: var(--color-paper);
+  transition:
+    background-color 0.4s var(--ease-quint),
+    color 0.4s var(--ease-quint),
+    transform 0.3s var(--ease-quint);
+}
+html[data-theme="red"] .nav-dot,
+html.menu-open .nav-dot {
+  background: var(--color-paper);
+  color: var(--color-red);
+}
+.nav-pill {
+  color: var(--page-fg);
+  box-shadow: inset 0 0 0 2px currentColor;
+  transition: color 0.4s var(--ease-quint);
+}
+html.menu-open .nav-pill,
+html.menu-open .nav-label {
+  color: var(--color-paper);
+}
+.nav-label {
+  color: var(--page-fg);
+  transition: color 0.4s var(--ease-quint);
+}
+
+/* No JS: show everything in its final state */
+.no-js .hero-logo,
+.no-js .rv-word,
+.no-js .logo-letter,
+.no-js .hero-card,
+.no-js .bubble,
+.no-js .swing,
+.no-js .pop,
+.no-js .rise {
+  transform: none !important;
+  opacity: 1 !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-logo path {
+    stroke-dashoffset: 0 !important;
+  }
+  .hero-logo,
+  .rv-word,
+  .logo-letter,
+  .hero-card,
+  .bubble,
+  .swing,
+  .pop,
+  .rise {
+    transform: none !important;
+    opacity: 1 !important;
+    transition: none !important;
+  }
+  .bubble-float,
+  .label-letter {
+    animation: none !important;
+  }
+}
+
+/* Skip the intro on repeat visits in the same session (set by inline script) */
+.intro-seen .loader {
+  display: none;
 }
