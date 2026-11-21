@@ -159,7 +159,7 @@ const photoMeta: Record<number, [TestCentre["id"], number]> = {
 export const passes: Pass[] = Object.entries(photoMeta).map(
   ([n, [centre, focusX]]) => ({
     id: `pass-${n.padStart(2, "0")}`,
-    image: `/images/passes/pass-${n.padStart(2, "0")}.png`,
+    image: `/images/passes/pass-${n.padStart(2, "0")}.webp`,
     testCentre: centre,
     focusX,
   }),
