@@ -43,7 +43,7 @@ export default function ContactPage() {
                   {c.label}
                 </span>
                 <span
-                  className={`display text-ink transition-colors group-hover:text-red sm:col-span-9 ${c.label === "Email" ? "text-[clamp(1.5rem,5vw,3.5rem)] [overflow-wrap:anywhere]" : "text-heading-sm"}`}
+                  className={`display text-ink transition-colors group-hover:text-red sm:col-span-9 ${c.label === "Email" ? "text-[5.6vw] [overflow-wrap:anywhere] sm:text-[clamp(1.5rem,5vw,3.5rem)]" : "text-heading-sm"}`}
                 >
                   {c.value}
                 </span>

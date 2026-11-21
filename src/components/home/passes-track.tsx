@@ -52,13 +52,13 @@ export function PassesTrack({ items }: { items: Pass[] }) {
 
         <div
           ref={track}
-          className="mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 will-change-transform sm:px-8 lg:mt-12 lg:snap-none lg:overflow-visible lg:px-12"
+          className="mt-10 flex snap-x snap-mandatory scroll-px-5 gap-3 overflow-x-auto px-5 pb-2 will-change-transform [scrollbar-width:none] sm:scroll-px-8 sm:gap-4 sm:px-8 lg:mt-12 lg:snap-none lg:overflow-visible lg:px-12"
         >
           {items.map((p, i) => (
             <InView
               as="figure"
               key={p.id}
-              className="pop relative aspect-[4/5] w-[72vw] shrink-0 snap-start sm:w-[42vw] lg:w-[24vw] lg:max-w-[26rem]"
+              className="pop relative aspect-[742/556] w-[calc(100vw-2.5rem)] shrink-0 snap-start sm:aspect-[4/5] sm:w-[42vw] lg:w-[24vw] lg:max-w-[26rem]"
               style={{ "--delay": `${(i % 3) * 80}ms` } as React.CSSProperties}
             >
               <div className="card-img group">
@@ -66,7 +66,7 @@ export function PassesTrack({ items }: { items: Pass[] }) {
                   src={p.image}
                   alt={`Bonam pupil celebrating a pass at ${centreName(p.testCentre)} test centre`}
                   fill
-                  sizes="(max-width: 640px) 72vw, (max-width: 1024px) 42vw, 26rem"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 42vw, 26rem"
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                   style={{ objectPosition: `${p.focusX}% 50%` }}
                 />
@@ -79,7 +79,7 @@ export function PassesTrack({ items }: { items: Pass[] }) {
           <InView
             as={Link}
             href="/passes"
-            className="pop display grid aspect-[4/5] w-[72vw] shrink-0 snap-start place-items-center rounded-[var(--radius-card)] bg-red p-8 text-center text-heading-sm text-paper transition-colors hover:bg-paper hover:text-red sm:w-[42vw] lg:w-[24vw] lg:max-w-[26rem]"
+            className="pop display grid aspect-[742/556] w-[calc(100vw-2.5rem)] shrink-0 snap-start place-items-center sm:aspect-[4/5] rounded-[var(--radius-card)] bg-red p-8 text-center text-heading-sm text-paper transition-colors hover:bg-paper hover:text-red sm:w-[42vw] lg:w-[24vw] lg:max-w-[26rem]"
           >
             See others →
           </InView>
