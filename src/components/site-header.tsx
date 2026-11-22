@@ -21,6 +21,15 @@ const links = [
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const [label, setLabel] = useState("");
+  const [scrolled, setScrolled] = useState(false);
+
+  // Show the blurred bar once the page has scrolled away from the very top.
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   useEffect(() => {
     const onLabel = (e: Event) => setLabel((e as CustomEvent<string>).detail);
@@ -44,7 +53,10 @@ export function SiteHeader() {
 
   return (
     <>
-      <header className="pointer-events-none fixed inset-x-0 top-0 z-50 grid grid-cols-[1fr_auto_1fr] items-center p-4 sm:p-6">
+      <header
+        data-scrolled={scrolled}
+        className="site-header pointer-events-none fixed inset-x-0 top-0 z-50 grid grid-cols-[1fr_auto_1fr] items-center px-4 py-3 sm:px-6 sm:py-4"
+      >
         <button
           type="button"
           onClick={() => setOpen((o) => !o)}

@@ -80,8 +80,9 @@ export function SiteFooter() {
         </p>
       </Container>
 
-      <InView className="mt-6 px-3 sm:px-5">
-        <GiantLogo className="-mb-[3vw] text-paper" />
+      <InView className="mx-auto mt-10 max-w-page px-5 pb-8 sm:px-8 sm:pb-10 lg:px-12">
+        {/* "BONAM" is ~2.7em wide, so this font-size makes it span the page width */}
+        <GiantLogo className="text-[calc((100vw-2.5rem)/2.72)] text-paper sm:text-[calc((100vw-4rem)/2.72)] lg:text-[min(calc((100vw-6rem)/2.72),calc((1440px-6rem)/2.72))]" />
       </InView>
     </footer>
   );

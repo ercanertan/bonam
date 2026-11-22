@@ -34,8 +34,8 @@ export function Wordmark({ className = "" }: { className?: string }) {
 }
 
 /**
- * Giant BONAM letters that fill the width and rise one by one
- * (hero: after the loader; footer: when scrolled into view).
+ * Giant BONAM word (letters set together) whose letters rise one by one
+ * when scrolled into view. Size it with a text-[…] class.
  */
 export function GiantLogo({
   className = "",
@@ -47,7 +47,7 @@ export function GiantLogo({
   return (
     <p
       aria-label={word}
-      className={`display flex w-full justify-between overflow-hidden text-[30.5vw] leading-[0.8] lg:text-[29.5vw] 2xl:text-[26rem] ${className}`}
+      className={`display flex w-full justify-center overflow-hidden leading-[0.92] ${className}`}
     >
       {word.split("").map((ch, i) => (
         <span

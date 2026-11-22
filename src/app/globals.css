@@ -170,6 +170,7 @@ html.lenis body {
   .hero-card:not(:first-child) .card-img {
     transform: scale(0.75);
   }
+
   .is-loaded .hero-card:nth-child(1) {
     transform: none;
   }
@@ -187,6 +188,11 @@ html.lenis body {
     overflow: hidden;
     border-radius: var(--radius-card);
     background: var(--color-mist);
+    /* Drop shadow so every photo card lifts off the page */
+    box-shadow:
+      0 50px 90px -20px rgb(27 18 18 / 0.6),
+      0 22px 40px -14px rgb(27 18 18 / 0.45),
+      0 4px 10px rgb(27 18 18 / 0.15);
   }
 
   /* ---------- Emoji chat bubbles ---------- */
@@ -268,6 +274,28 @@ html.lenis body {
 }
 
 /* ---------- Header theming per section ---------- */
+/* Frosted bar behind the header, tinted to the current section colour */
+.site-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: color-mix(in srgb, var(--page-bg) 72%, transparent);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  backdrop-filter: blur(16px) saturate(1.4);
+  border-bottom: 1px solid color-mix(in srgb, var(--page-fg) 8%, transparent);
+  opacity: 0;
+  transition:
+    opacity 0.4s var(--ease-quint),
+    background-color 0.5s var(--ease-quint);
+}
+.site-header[data-scrolled="true"]::before {
+  opacity: 1;
+}
+html.menu-open .site-header::before {
+  opacity: 0;
+}
+
 .nav-dot {
   background: var(--color-red);
   color: var(--color-paper);

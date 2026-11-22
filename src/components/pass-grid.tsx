@@ -5,7 +5,7 @@ import { InView } from "@/components/motion/in-view";
 /** Rounded photo cards that pop in one after another as they scroll in. */
 export function PassGrid({ items }: { items: Pass[] }) {
   return (
-    <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    <ul className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
       {items.map((p, i) => (
         <InView
           as="li"
