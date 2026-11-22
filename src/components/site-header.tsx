@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { CarLine } from "@/components/brand";
 import { InstagramIcon, MailIcon, PhoneIcon, WhatsAppIcon } from "@/components/icons";
@@ -24,6 +25,16 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const [label, setLabel] = useState("");
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+
+  // On the home page the logo button scrolls back to the top instead of reloading.
+  const onHomeClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (pathname !== "/") return;
+    e.preventDefault();
+    const lenis = getLenis();
+    if (lenis) lenis.scrollTo(0, { duration: 1.4 });
+    else window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   // Show the blurred bar once the page has scrolled away from the very top.
   useEffect(() => {
@@ -106,7 +117,8 @@ export function SiteHeader() {
           </a>
           <Link
             href="/"
-            aria-label={`${site.name} home`}
+            onClick={onHomeClick}
+            aria-label={pathname === "/" ? "Back to top" : `${site.name} home`}
             className="nav-dot grid size-[50px] place-items-center rounded-full hover:scale-105"
           >
             <CarLine className="w-8" strokeWidth={34} />
