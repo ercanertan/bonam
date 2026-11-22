@@ -3,6 +3,7 @@ import { RevealText } from "@/components/motion/reveal";
 import { Container, Label, Pill } from "@/components/ui";
 import { site, testCentres } from "@/content/site";
 import { InView } from "@/components/motion/in-view";
+import { InstagramIcon, MailIcon, PhoneIcon, WhatsAppIcon } from "@/components/icons";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -11,9 +12,10 @@ export const metadata: Metadata = {
 
 // Static for now: direct contact links rather than a form with no backend.
 const channels = [
-  { label: "Call", value: site.phone, href: site.phoneHref },
-  { label: "WhatsApp", value: "Message us", href: site.whatsappHref },
-  { label: "Email", value: site.email, href: `mailto:${site.email}` },
+  { label: "Call", value: site.phone, href: site.phoneHref, Icon: PhoneIcon },
+  { label: "WhatsApp", value: "Message us", href: site.whatsappHref, Icon: WhatsAppIcon },
+  { label: "Instagram", value: site.instagramHandle, href: site.instagram, Icon: InstagramIcon },
+  { label: "Email", value: site.email, href: `mailto:${site.email}`, Icon: MailIcon },
 ];
 
 export default function ContactPage() {
@@ -39,11 +41,12 @@ export default function ContactPage() {
                 href={c.href}
                 className="group grid gap-2 py-8 sm:grid-cols-12 sm:items-baseline"
               >
-                <span className="text-sm font-medium tracking-wide uppercase sm:col-span-3">
+                <span className="flex items-center gap-3 text-sm font-medium tracking-wide uppercase sm:col-span-3">
+                  <c.Icon className="text-2xl text-red" />
                   {c.label}
                 </span>
                 <span
-                  className={`display text-ink transition-colors group-hover:text-red sm:col-span-9 ${c.label === "Email" ? "text-[5.6vw] [overflow-wrap:anywhere] sm:text-[clamp(1.5rem,5vw,3.5rem)]" : "text-heading-sm"}`}
+                  className={`display text-ink transition-colors group-hover:text-red sm:col-span-9 ${c.label === "Email" || c.label === "Instagram" ? "text-[5.6vw] [overflow-wrap:anywhere] sm:text-[clamp(1.5rem,5vw,3.5rem)]" : "text-heading-sm"}`}
                 >
                   {c.value}
                 </span>

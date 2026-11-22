@@ -4,6 +4,7 @@ import { RevealText } from "@/components/motion/reveal";
 import { site, testCentres } from "@/content/site";
 import { Button, Container } from "./ui";
 import { InView } from "@/components/motion/in-view";
+import { InstagramIcon, MailIcon, PhoneIcon, WhatsAppIcon } from "@/components/icons";
 
 /** Red closing section: CTA, contact details, giant BONAM that rises into view. */
 export function SiteFooter() {
@@ -20,6 +21,7 @@ export function SiteFooter() {
             Book a lesson
           </Button>
           <Button href={site.phoneHref} variant="outlineLight">
+            <PhoneIcon />
             Call {site.phone}
           </Button>
         </div>
@@ -29,17 +31,26 @@ export function SiteFooter() {
             <p className="mb-3 text-sm tracking-wide text-ink uppercase">Contact</p>
             <ul className="space-y-1.5">
               <li>
-                <a href={site.phoneHref} className="hover:text-ink">
+                <a href={site.phoneHref} className="inline-flex items-center gap-2.5 hover:text-ink">
+                  <PhoneIcon />
                   {site.phone}
                 </a>
               </li>
               <li>
-                <a href={site.whatsappHref} className="hover:text-ink">
+                <a href={site.whatsappHref} className="inline-flex items-center gap-2.5 hover:text-ink">
+                  <WhatsAppIcon />
                   WhatsApp
                 </a>
               </li>
               <li>
-                <a href={`mailto:${site.email}`} className="hover:text-ink">
+                <a href={site.instagram} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2.5 hover:text-ink">
+                  <InstagramIcon />
+                  {site.instagramHandle}
+                </a>
+              </li>
+              <li>
+                <a href={`mailto:${site.email}`} className="inline-flex items-center gap-2.5 hover:text-ink">
+                  <MailIcon />
                   {site.email}
                 </a>
               </li>
@@ -64,6 +75,11 @@ export function SiteFooter() {
               <li>
                 <Link href="/passes" className="hover:text-ink">
                   Pass gallery
+                </Link>
+              </li>
+              <li>
+                <Link href="/#reviews" className="hover:text-ink">
+                  Reviews
                 </Link>
               </li>
               <li>

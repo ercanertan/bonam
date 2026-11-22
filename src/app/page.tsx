@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Hero } from "@/components/home/hero";
 import { Manifest } from "@/components/home/manifest";
 import { PassesTrack } from "@/components/home/passes-track";
+import { Reviews } from "@/components/home/reviews";
 import { Bubble, RevealText, Rise } from "@/components/motion/reveal";
 import { Button, Container, Label, Pill } from "@/components/ui";
 import {
@@ -133,6 +134,7 @@ export default function Home() {
 
       <PassesTrack items={passes.slice(0, 8)} />
 
+      <Reviews />
       {/* Where we teach — type is the visual */}
       <section data-section="paper" data-label="Where" className="py-24 sm:py-36">
         <Container>

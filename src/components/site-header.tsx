@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { CarLine } from "@/components/brand";
+import { InstagramIcon, MailIcon, PhoneIcon, WhatsAppIcon } from "@/components/icons";
 import { site } from "@/content/site";
 import { getLenis } from "@/lib/scroll";
 
@@ -10,6 +11,7 @@ const links = [
   { href: "/", label: "Home" },
   { href: "/#lessons", label: "Lessons" },
   { href: "/passes", label: "Pass gallery" },
+  { href: "/#reviews", label: "Reviews" },
   { href: "/#faq", label: "FAQ" },
   { href: "/contact", label: "Contact" },
 ];
@@ -97,8 +99,9 @@ export function SiteHeader() {
         <div className="pointer-events-auto flex items-center justify-end gap-3">
           <a
             href={site.phoneHref}
-            className="nav-pill hidden rounded-full px-5 py-3 text-sm font-bold hover:opacity-70 md:inline-flex"
+            className="nav-pill hidden items-center gap-2 rounded-full px-5 py-3 text-sm font-bold hover:opacity-70 md:inline-flex"
           >
+            <PhoneIcon className="text-base" />
             Call {site.phone}
           </a>
           <Link
@@ -135,13 +138,20 @@ export function SiteHeader() {
             ))}
           </ul>
           <div className="mt-10 flex flex-wrap gap-x-8 gap-y-2 text-lg font-medium">
-            <a href={site.phoneHref} className="hover:text-ink">
+            <a href={site.phoneHref} className="inline-flex items-center gap-2.5 hover:text-ink">
+              <PhoneIcon />
               {site.phone}
             </a>
-            <a href={site.whatsappHref} className="hover:text-ink">
+            <a href={site.whatsappHref} className="inline-flex items-center gap-2.5 hover:text-ink">
+              <WhatsAppIcon />
               WhatsApp
             </a>
-            <a href={`mailto:${site.email}`} className="hover:text-ink">
+            <a href={site.instagram} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2.5 hover:text-ink">
+              <InstagramIcon />
+              Instagram
+            </a>
+            <a href={`mailto:${site.email}`} className="inline-flex items-center gap-2.5 hover:text-ink">
+              <MailIcon />
               {site.email}
             </a>
           </div>

@@ -15,6 +15,8 @@ export type SiteSettings = {
   phone: string; // display format
   phoneHref: string; // tel: link
   whatsappHref: string;
+  instagram: string;
+  instagramHandle: string;
   email: string;
   area: string;
   instructor: string;
@@ -42,6 +44,13 @@ export type Pass = {
   firstTime?: boolean;
 };
 
+export type Review = {
+  author: string;
+  rating: number;
+  /** Verbatim from Google; paragraphs separated by a blank line. */
+  text: string;
+};
+
 export type Step = { title: string; body: string };
 export type LearnerType = { title: string; estimate: string; body: string };
 export type Faq = { question: string; answer: string };
@@ -53,6 +62,8 @@ export const site: SiteSettings = {
   phone: "07593 242247",
   phoneHref: "tel:+447593242247",
   whatsappHref: "https://wa.me/447593242247",
+  instagram: "https://www.instagram.com/bonam_drivingschool",
+  instagramHandle: "@bonam_drivingschool",
   email: "hello@bonamdrivingschool.co.uk",
   area: "Barnet · Tottenham · Wood Green · Enfield",
   instructor: "Your instructor", // TODO: instructor name
@@ -175,6 +186,62 @@ export function passById(id: string) {
 export function centreName(id: TestCentre["id"]) {
   return testCentres.find((c) => c.id === id)?.name ?? id;
 }
+
+/** Google reviews, copied verbatim from the Google Business Profile (Nov 2026). */
+export const googleReviews = {
+  rating: 5.0,
+  count: 103,
+  // TODO: swap for the profile's own "Share" link from Google Maps
+  url: "https://www.google.com/search?q=Bonam+Driving+School+%2F+Driving+Lessons+in+North+London+reviews",
+  /** Topics Google pulls out of the reviews, with how many mention each. */
+  topics: [
+    { label: "Confidence building", count: 17 },
+    { label: "Supportive instructor", count: 9 },
+    { label: "Stress-free lessons", count: 6 },
+  ],
+  reviews: [
+    {
+      author: "T M",
+      rating: 5,
+      text: "Passed first time with Bonam driving school so I think that says it all 😊🙏 I explained that I had Autism and ADHD at the beginning of my learning and Zafer was patient, supportive, and explained different situations in detail so that when it came to exam time, I was prepared and had considered all points the examiner might be analysing. He answered all of my questions and did his best to understand my needs; I felt comfortable to ask for clarification from him. He was kind and helpful, I felt safe, relaxed and confident with his guidance. I would recommend him to others. Thank you, Zafer. 🙏",
+    },
+    {
+      author: "Nicole Serrant",
+      rating: 5,
+      text: "I honestly couldn’t recommend Zafer at Bonam Driving School highly enough. He is remarkably patient — genuinely, I don’t think I ever saw him lose his cool once, no matter how many mistakes I made (or repeated!). He is always calm, supportive and encouraging.\n\nHe’s also funny and very easy-going, which makes such a difference when you’re learning to drive. Lessons never felt stressful or intimidating; he has a way of putting you completely at ease while still making sure you are learning and progressing.\n\nWhat I particularly appreciated was the way he explains things. Everything is explained in a practical, straightforward and uncomplicated way that makes it easy to understand and, more importantly, easy to remember when you’re actually driving.\n\nZafer is also extremely thorough. He identifies your weaknesses and doesn’t just gloss over them — he spends the time helping you strengthen them until you are genuinely confident. The number of times he had me doing reverse parallel parking repeatedly until I was literally sweating! 😂 But did it pay off? Absolutely.\n\nI passed my test feeling properly prepared, not just prepared enough to get through the test. I would recommend Zafer and Bonam Driving School 100%, without reservation. An excellent instructor and a genuinely lovely person to learn with. 🚗🎉 Thanx Zafer 🙏",
+    },
+    {
+      author: "Gabriella Bavetta",
+      rating: 5,
+      text: "I passed my driving test!!! This wouldn’t have been possible without the patience from my driving instructor Zafer. He remained calm and patient countless times throughout lessons where I made silly mistakes and got easily distracted by things. He was my second instructor because I had an awful experience with my first one from a different school. I was scared to continue taking lessons but Zafer gave me the confidence I needed to improve. I’m so grateful for finding him. I definitely recommend!!",
+    },
+    {
+      author: "İlkay Şanlıtürk",
+      rating: 5,
+      text: "I passed my driving test at Enfield Innova Park thanks to Zafer Bey! He is a very patient, professional and supportive instructor. He knows the test routes around Innova Park really well and helped me understand what to expect on the test day. His clear explanations and guidance gave me a lot of confidence. I highly recommend Zafer Bey to anyone preparing for their driving test. Thank you so much for all your help! 🚗👏",
+    },
+    {
+      author: "Ellen Danquah",
+      rating: 5,
+      text: "Zafer is an outstanding instructor. He is patient, takes the time to explain everything clearly, and helps build your confidence behind the wheel. His teaching style is excellent and easy to follow. As someone who had no prior driving experience, I can honestly say his guidance made all the difference I passed my driving test on the first attempt🫶",
+    },
+    {
+      author: "Shobhna Sharma",
+      rating: 5,
+      text: "I highly recommend Zafer as a driving instructor. He was always punctual, calm, and encouraging throughout my lessons. He explained manoeuvres and road situations in a way that was easy to understand and gave constructive feedback after each lesson. His patience and support helped me become a much more confident and safe driver. Thank you for all your help!",
+    },
+    {
+      author: "Murat Solak",
+      rating: 5,
+      text: "I had a great experience learning to drive with Zafer at Bonam Driving School. He was very patient, professional and supportive throughout my lessons, and always explained everything clearly. Thanks to his guidance and teaching, I managed to pass my driving test on my first attempt! I would definitely recommend Zafer and Bonam Driving School to anyone looking for a great driving instructor.",
+    },
+    {
+      author: "Isla Kirkland",
+      rating: 5,
+      text: "Zafer is such an amazing instructor and helped me pass on my first try. He is so patient and explains everything so clearly. Zafer is great at making you feel completely comfortable from your first lesson and would recommend him to everyone. Thank you so much for everything!!",
+    },
+  ] satisfies Review[],
+};
 
 export const steps: Step[] = [
   {
