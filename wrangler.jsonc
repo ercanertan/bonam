@@ -1,0 +1,13 @@
+// Cloudflare deploy for the static export: `npm run build` writes the site to
+// out/, and `npx wrangler deploy` uploads it as static assets (no server code).
+{
+  "name": "bonam",
+  "compatibility_date": "2026-11-01",
+  "assets": {
+    "directory": "./out",
+    // /passes → /passes/index.html, matching trailingSlash: true in next.config.ts
+    "html_handling": "auto-trailing-slash",
+    // serve out/404.html for unknown URLs
+    "not_found_handling": "404-page"
+  }
+}
