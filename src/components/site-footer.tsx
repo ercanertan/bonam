@@ -73,6 +73,11 @@ export function SiteFooter() {
                 </Link>
               </li>
               <li>
+                <Link href="/#test-day" className="hover:text-ink">
+                  Test day
+                </Link>
+              </li>
+              <li>
                 <Link href="/passes" className="hover:text-ink">
                   Pass gallery
                 </Link>

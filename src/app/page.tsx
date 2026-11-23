@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Hero } from "@/components/home/hero";
 import { Manifest } from "@/components/home/manifest";
 import { PassesTrack } from "@/components/home/passes-track";
+import { TestDay } from "@/components/home/test-day";
 import { Reviews } from "@/components/home/reviews";
 import { Bubble, RevealText, Rise } from "@/components/motion/reveal";
 import { Button, Container, Label, Pill } from "@/components/ui";
@@ -133,6 +134,8 @@ export default function Home() {
           </Rise>
         </Container>
       </section>
+
+      <TestDay />
 
       <PassesTrack items={passes.slice(0, 8)} />
 

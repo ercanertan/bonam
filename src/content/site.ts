@@ -278,3 +278,59 @@ export const faqs: Faq[] = [
       "Yes. Book the test-day package and you'll have a warm-up lesson and the car for your test.",
   },
 ];
+
+/** "What will the examiner say?" — test-day walkthrough (written for Bonam). */
+export type TestStage = {
+  title: string;
+  /** Short standard phrases you're likely to hear */
+  phrases: string[];
+  body: string;
+};
+
+export const testDay = {
+  intro:
+    "Knowing what's coming takes a lot of the nerves away. Here's how a typical driving test unfolds, the kind of things your examiner will say at each stage, and what they actually want from you.",
+  stages: [
+    {
+      title: "Meeting your examiner",
+      phrases: ["Can I see your licence?", "Would you like your instructor with you?"],
+      body: "Your examiner calls your name, checks your licence and asks you to sign a short declaration about insurance and where you live. They'll ask if you'd like your instructor to sit in the back. Decide before the day. Either answer is completely fine.",
+    },
+    {
+      title: "Eyesight & safety questions",
+      phrases: ["Please read that number plate", "Tell me how you'd check…"],
+      body: "Outside, you'll read a number plate from about 20 metres. You'll be told the test lasts around 40 minutes. Expect one ‘tell me’ question about the car before you set off, and one ‘show me’ task to do while you're driving, like working the screen wash.",
+    },
+    {
+      title: "Following directions",
+      phrases: ["Take the next road on the left", "At the roundabout, take the third exit", "Pull up on the left at a safe place"],
+      body: "Unless you're told otherwise, follow the road ahead. Directions come in good time and in plain language. At roundabouts, count the exits as you go. When asked to pull up, choose somewhere safe and legal. You decide exactly where.",
+    },
+    {
+      title: "The emergency stop",
+      phrases: ["When I raise my hand and say ‘Stop’…"],
+      body: "Not every test has one. If yours does, the examiner explains it first, checks it's safe behind, then raises their hand and says “Stop”. Brake firmly and under control. It's only asked once. Afterwards, check all around properly before moving off again.",
+    },
+    {
+      title: "One reversing manoeuvre",
+      phrases: ["Reverse into a bay of your choice", "Pull up on the right, then reverse"],
+      body: "You'll be asked to do one of these: parallel park, reverse into a bay, drive forward into a bay and reverse out, or pull up on the right and reverse about two car lengths. Go slowly, keep looking all around, and if you need to correct your position, that's allowed.",
+    },
+    {
+      title: "Independent driving",
+      phrases: ["Follow the sat nav until I tell you otherwise", "Follow the signs for…"],
+      body: "For around 20 minutes you'll follow a sat nav, which the examiner sets up, or road signs to a destination. Taking a wrong turn isn't a fault if you do it safely. The examiner simply gets you back on track. What matters is safe, confident driving.",
+    },
+    {
+      title: "Your result",
+      phrases: ["Please switch the engine off", "I'm pleased to tell you…"],
+      body: "Back at the centre you'll be asked to switch off while the examiner finishes the paperwork, then they'll give you the result and talk you through your report. Pass, and your full licence can be sent to you automatically. Not this time? We'll go through the report together and plan what's next.",
+    },
+  ] satisfies TestStage[],
+  tips: [
+    "Didn't catch something? Ask the examiner to repeat it. Early is best.",
+    "You won't be told about mistakes during the test, so don't try to guess how it's going.",
+    "One small fault isn't a fail. Stay calm and keep driving your best.",
+    "Missed a turn? Carry on safely. A wrong way isn't a driving fault.",
+  ],
+};
