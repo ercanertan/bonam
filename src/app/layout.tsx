@@ -4,6 +4,7 @@ import { Loader } from "@/components/motion/loader";
 import { ScrollController } from "@/components/motion/scroll-controller";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { JsonLd, drivingSchoolSchema } from "@/components/json-ld";
 import { site } from "@/content/site";
 import "./globals.css";
 
@@ -18,13 +19,27 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
+const description =
+  "Patient, one-to-one automatic driving lessons in North London, especially for nervous learners. Real test routes in Barnet, Enfield, Tottenham, Wood Green and Chingford.";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(site.url),
   title: {
     default: `${site.name} | Automatic Driving Lessons in North London`,
     template: `%s | ${site.name}`,
   },
-  description:
-    "Patient, one-to-one automatic driving lessons in North London for learners of all abilities, especially nervous drivers. Barnet, Tottenham, Wood Green and Enfield.",
+  description,
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    locale: "en_GB",
+    siteName: site.name,
+    url: "/",
+    title: `${site.name} | Automatic Driving Lessons in North London`,
+    description,
+  },
+  twitter: { card: "summary_large_image" },
+  formatDetection: { telephone: false },
 };
 
 // Runs before first paint: skip the intro if it already played this session.
@@ -39,6 +54,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: introScript }} />
+        <JsonLd data={drivingSchoolSchema} />
       </head>
       <body className="flex min-h-svh flex-col">
         <a

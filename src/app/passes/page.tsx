@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { PassGrid } from "@/components/pass-grid";
 import { RevealText } from "@/components/motion/reveal";
 import { Button, Container, Label } from "@/components/ui";
 import { passes } from "@/content/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Pass gallery",
   description:
-    "Real Bonam Driving School pupils on the day they passed their driving test in Barnet, Enfield, Tottenham and Chingford.",
-};
+    "Real Bonam Driving School pupils on the day they passed their driving test in Barnet, Enfield, Tottenham, Wood Green and Chingford.",
+  path: "/passes/",
+});
 
 export default function PassesPage() {
   return (

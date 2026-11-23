@@ -10,6 +10,7 @@
 
 export type SiteSettings = {
   name: string;
+  url: string; // canonical origin, no trailing slash
   tagline: string;
   slogan: string;
   phone: string; // display format
@@ -57,6 +58,7 @@ export type Faq = { question: string; answer: string };
 
 export const site: SiteSettings = {
   name: "Bonam Driving School",
+  url: "https://bonamdrivingschool.com",
   tagline: "Automatic driving lessons in North London",
   slogan: "Turning nervous learners into confident drivers.",
   phone: "07593 242247",

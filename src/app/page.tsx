@@ -16,6 +16,7 @@ import {
   testCentres,
 } from "@/content/site";
 import { InView } from "@/components/motion/in-view";
+import { JsonLd, faqSchema } from "@/components/json-ld";
 
 const lessonPhoto = passById("pass-15");
 const centreColours = ["text-red", "text-rose", "text-ink", "text-coral", "text-red"];
@@ -23,6 +24,7 @@ const centreColours = ["text-red", "text-rose", "text-ink", "text-coral", "text-
 export default function Home() {
   return (
     <>
+      <JsonLd data={faqSchema} />
       <Hero />
 
       {/* Lesson options — list + 3D swing-in photo */}

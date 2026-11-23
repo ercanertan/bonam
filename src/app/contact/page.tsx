@@ -1,14 +1,17 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { RevealText } from "@/components/motion/reveal";
 import { Container, Label, Pill } from "@/components/ui";
 import { site, testCentres } from "@/content/site";
 import { InView } from "@/components/motion/in-view";
 import { InstagramIcon, MailIcon, PhoneIcon, WhatsAppIcon } from "@/components/icons";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Contact",
-  description: `Book automatic driving lessons with ${site.name}. Call, WhatsApp or email.`,
-};
+  description:
+    `Book automatic driving lessons in North London with ${site.name}. Call or WhatsApp ${site.phone}, email us or message us on Instagram.`,
+  path: "/contact/",
+});
 
 // Static for now: direct contact links rather than a form with no backend.
 const channels = [

@@ -69,7 +69,7 @@ export function Hero() {
       >
         <Container>
           <h1 className="sr-only">
-            {site.name}: driving lessons in North London. The road to success.
+            {site.name}: automatic driving lessons in North London. The road to success.
           </h1>
           <div className="hero-logo flex justify-center text-[4.3vw] whitespace-nowrap lg:text-[min(3vw,2.75rem)]">
             <FullLogo tagline={false} />
