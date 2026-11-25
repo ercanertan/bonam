@@ -16,6 +16,7 @@ export type SiteSettings = {
   phone: string; // display format
   phoneHref: string; // tel: link
   whatsappHref: string;
+  youtube: string;
   instagram: string;
   instagramHandle: string;
   email: string;
@@ -64,6 +65,7 @@ export const site: SiteSettings = {
   phone: "07593 242247",
   phoneHref: "tel:+447593242247",
   whatsappHref: "https://wa.me/447593242247",
+  youtube: "https://www.youtube.com/@Bonamdrivingschool",
   instagram: "https://www.instagram.com/bonam_drivingschool",
   instagramHandle: "@bonam_drivingschool",
   email: "hello@bonamdrivingschool.co.uk",
@@ -280,8 +282,17 @@ export const faqs: Faq[] = [
 ];
 
 /** "What will the examiner say?" — test-day walkthrough (written for Bonam). */
+/**
+ * A video from the Bonam "What will the examiner say?" series.
+ * `id` = the YouTube code after /shorts/ — leave it out until the video is
+ * uploaded and the cover shows "Coming soon".
+ */
+export type Video = { id?: string; title: string; cover: string };
+
 export type TestStage = {
   title: string;
+  /** Optional video for this stage — add more as the channel grows */
+  video?: Video;
   /** Short standard phrases you're likely to hear */
   phrases: string[];
   body: string;
@@ -293,31 +304,52 @@ export const testDay = {
   stages: [
     {
       title: "Meeting your examiner",
+      video: {
+        id: "_CQ4lhbjfUQ",
+        title: "Part 01: meeting your examiner",
+        cover: "/images/videos/examiner-01.webp",
+      },
       phrases: ["Can I see your licence?", "Would you like your instructor with you?"],
       body: "Your examiner calls your name, checks your licence and asks you to sign a short declaration about insurance and where you live. They'll ask if you'd like your instructor to sit in the back. Decide before the day. Either answer is completely fine.",
     },
     {
       title: "Eyesight & safety questions",
+      video: {
+        id: "uHvp3M2YhMA",
+        title: "Part 02: the test briefing",
+        cover: "/images/videos/examiner-02.webp",
+      },
       phrases: ["Please read that number plate", "Tell me how you'd check…"],
       body: "Outside, you'll read a number plate from about 20 metres. You'll be told the test lasts around 40 minutes. Expect one ‘tell me’ question about the car before you set off, and one ‘show me’ task to do while you're driving, like working the screen wash.",
     },
     {
       title: "Following directions",
+      video: {
+        id: "WD1Lltbsc38",
+        title: "Part 03: directions and independent driving",
+        cover: "/images/videos/examiner-03.webp",
+      },
       phrases: ["Take the next road on the left", "At the roundabout, take the third exit", "Pull up on the left at a safe place"],
       body: "Unless you're told otherwise, follow the road ahead. Directions come in good time and in plain language. At roundabouts, count the exits as you go. When asked to pull up, choose somewhere safe and legal. You decide exactly where.",
     },
     {
       title: "The emergency stop",
+      video: { title: "Part 04: the emergency stop", cover: "/images/videos/examiner-04.webp" },
       phrases: ["When I raise my hand and say ‘Stop’…"],
       body: "Not every test has one. If yours does, the examiner explains it first, checks it's safe behind, then raises their hand and says “Stop”. Brake firmly and under control. It's only asked once. Afterwards, check all around properly before moving off again.",
     },
     {
       title: "One reversing manoeuvre",
+      video: {
+        title: "Part 05: one reversing manoeuvre",
+        cover: "/images/videos/examiner-05.webp",
+      },
       phrases: ["Reverse into a bay of your choice", "Pull up on the right, then reverse"],
       body: "You'll be asked to do one of these: parallel park, reverse into a bay, drive forward into a bay and reverse out, or pull up on the right and reverse about two car lengths. Go slowly, keep looking all around, and if you need to correct your position, that's allowed.",
     },
     {
       title: "Independent driving",
+      video: { title: "Part 06: independent driving", cover: "/images/videos/examiner-06.webp" },
       phrases: ["Follow the sat nav until I tell you otherwise", "Follow the signs for…"],
       body: "For around 20 minutes you'll follow a sat nav, which the examiner sets up, or road signs to a destination. Taking a wrong turn isn't a fault if you do it safely. The examiner simply gets you back on track. What matters is safe, confident driving.",
     },

@@ -1,7 +1,8 @@
 import { InView } from "@/components/motion/in-view";
 import { Bubble, RevealText, Rise } from "@/components/motion/reveal";
 import { Container, Label } from "@/components/ui";
-import { testDay } from "@/content/site";
+import { YouTubeShort } from "@/components/youtube-short";
+import { site, testDay } from "@/content/site";
 
 /** "What will the examiner say?" — stage-by-stage test-day guide. */
 export function TestDay() {
@@ -19,11 +20,21 @@ export function TestDay() {
             <InView className="relative">
               <RevealText
                 className="display text-heading"
-                lines={["What will", "the examiner", { text: "say?", className: "text-red" }]}
+                lines={[
+                  "What will",
+                  "the examiner",
+                  { text: "say?", className: "text-red" },
+                ]}
               />
-              <Bubble emoji="🗣️" rot={8} className="-top-16 right-2 sm:-top-14" />
+              <Bubble
+                emoji="🗣️"
+                rot={8}
+                className="-top-16 right-2 sm:-top-14"
+              />
             </InView>
-            <Rise className="mt-8 max-w-[46ch] text-lg leading-snug">{testDay.intro}</Rise>
+            <Rise className="mt-8 max-w-[46ch] text-lg leading-snug">
+              {testDay.intro}
+            </Rise>
 
             <Rise
               delay={120}
@@ -41,6 +52,18 @@ export function TestDay() {
                 ))}
               </ul>
             </Rise>
+
+            <Rise delay={180} className="mt-6">
+              <a
+                href={site.youtube}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-base font-semibold text-red underline-offset-4 hover:underline"
+              >
+                <span aria-hidden>▶</span> More videos on our YouTube channel
+                <span aria-hidden>↗</span>
+              </a>
+            </Rise>
           </div>
         </div>
 
@@ -49,13 +72,15 @@ export function TestDay() {
             <Rise as="li" key={stage.title} delay={(i % 4) * 60}>
               <details
                 open={i === 0}
-                className="group border-b-2 border-rose/50 py-6 first:border-t-2 sm:py-7"
+                className="group border-b-2 border-rose/50 py-6 sm:py-7"
               >
                 <summary className="flex cursor-pointer list-none items-baseline gap-4 hover:text-red sm:gap-6 [&::-webkit-details-marker]:hidden">
                   <span className="display w-[2.2ch] shrink-0 text-subheading text-rose">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <span className="display flex-1 text-subheading">{stage.title}</span>
+                  <span className="display flex-1 text-subheading">
+                    {stage.title}
+                  </span>
                   <span
                     aria-hidden
                     className="text-4xl leading-none font-light text-red transition-transform duration-300 group-open:rotate-45"
@@ -64,21 +89,33 @@ export function TestDay() {
                   </span>
                 </summary>
 
-                <div className="mt-5 sm:pl-16">
-                  <p className="text-xs font-semibold tracking-wide uppercase">
-                    You might hear
-                  </p>
-                  <ul className="mt-3 flex flex-wrap gap-2">
-                    {stage.phrases.map((ph) => (
-                      <li
-                        key={ph}
-                        className="rounded-2xl rounded-bl-sm bg-paper px-4 py-2.5 text-base font-semibold text-red"
-                      >
-                        “{ph}”
-                      </li>
-                    ))}
-                  </ul>
-                  <p className="mt-5 max-w-[60ch] text-lg leading-snug">{stage.body}</p>
+                <div
+                  className={`mt-5 grid gap-6 sm:items-start sm:pl-16 ${stage.video ? "sm:grid-cols-[1fr_14rem]" : ""}`}
+                >
+                  <div>
+                    <p className="text-xs font-semibold tracking-wide uppercase">
+                      You might hear
+                    </p>
+                    <ul className="mt-3 flex flex-wrap gap-2">
+                      {stage.phrases.map((ph) => (
+                        <li
+                          key={ph}
+                          className="rounded-2xl rounded-bl-sm bg-paper px-4 py-2.5 text-base font-semibold text-red"
+                        >
+                          “{ph}”
+                        </li>
+                      ))}
+                    </ul>
+                    <p className="mt-5 max-w-[60ch] text-lg leading-snug">
+                      {stage.body}
+                    </p>
+                  </div>
+                  {stage.video && (
+                    <YouTubeShort
+                      video={stage.video}
+                      className="max-w-[16rem]"
+                    />
+                  )}
                 </div>
               </details>
             </Rise>
