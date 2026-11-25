@@ -334,3 +334,76 @@ export const testDay = {
     "Missed a turn? Carry on safely. A wrong way isn't a driving fault.",
   ],
 };
+
+/** "What's new" — DVSA news & rule changes. Facts checked against GOV.UK. */
+export type NewsRule = { date: string; title: string; body: string };
+export type NewsItem = {
+  id: string;
+  tag: string;
+  date: string;
+  title: string;
+  summary: string;
+  source: { label: string; url: string };
+};
+
+export const news = {
+  checked: "25 November 2026",
+  featured: {
+    tag: "DVSA 2026 changes",
+    title: "New driving test booking rules",
+    summary:
+      "DVSA has changed how car driving tests are booked and managed in England, Scotland and Wales. Here's what's different and when each rule started.",
+    rules: [
+      {
+        date: "31 Mar 2026",
+        title: "Only 2 changes per test",
+        body: "You can change your test date, time or centre (or swap with another learner) twice. Down from 6. Changes DVSA makes, like for bad weather, don't count.",
+      },
+      {
+        date: "12 May 2026",
+        title: "Only you can book",
+        body: "Only the learner can book, change or cancel their own test. Instructors and booking services can't do it for you, and cancellation-finder apps are banned.",
+      },
+      {
+        date: "9 Jun 2026",
+        title: "Move to the 3 nearest centres",
+        body: "If you move your test, you can choose one of the 3 test centres nearest to where it's booked, or go back to your original centre.",
+      },
+    ] satisfies NewsRule[],
+    forYou: [
+      "Book your test yourself on GOV.UK. We'll help you pick a date that fits your lessons.",
+      "Plan before you book. With only 2 changes, it's worth agreeing a realistic test date with us first.",
+      "Ignore paid ‘earlier test’ apps. They're no longer allowed and can get your booking cancelled.",
+    ],
+    source: {
+      label: "Changes to driving test booking rules in 2026",
+      url: "https://www.gov.uk/guidance/changes-to-driving-test-booking-rules-in-2026",
+    },
+  },
+  items: [
+    {
+      id: "swaps",
+      tag: "Booking",
+      date: "2026",
+      title: "Swapping tests with another learner",
+      summary:
+        "You can still swap tests with another learner who already has one booked. It counts as one of your 2 changes, and you must arrange it yourselves.",
+      source: {
+        label: "GOV.UK booking rules",
+        url: "https://www.gov.uk/guidance/changes-to-driving-test-booking-rules-in-2026",
+      },
+    },
+    {
+      id: "cpr",
+      tag: "Theory test",
+      date: "2026",
+      title: "CPR & defibrillator questions",
+      summary:
+        "The theory test now covers CPR and, for the first time, how to use a defibrillator (AED). There's no extra cost or time, just a little more to revise.",
+      source: {
+        label: "GOV.UK news",
+        url: "https://www.gov.uk/government/news/new-theory-test-questions-aim-to-boost-cardiac-arrest-survival-rate",
+      },
+    },
+  ] satisfies NewsItem[],
+};

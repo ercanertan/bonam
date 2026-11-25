@@ -78,6 +78,11 @@ export function SiteFooter() {
                 </Link>
               </li>
               <li>
+                <Link href="/#news" className="hover:text-ink">
+                  What&rsquo;s new
+                </Link>
+              </li>
+              <li>
                 <Link href="/passes" className="hover:text-ink">
                   Pass gallery
                 </Link>

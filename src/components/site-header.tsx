@@ -12,6 +12,7 @@ const links = [
   { href: "/", label: "Home" },
   { href: "/#lessons", label: "Lessons" },
   { href: "/#test-day", label: "Test day" },
+  { href: "/#news", label: "What’s new" },
   { href: "/passes", label: "Pass gallery" },
   { href: "/#reviews", label: "Reviews" },
   { href: "/#faq", label: "FAQ" },

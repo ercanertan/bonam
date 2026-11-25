@@ -3,6 +3,7 @@ import { Hero } from "@/components/home/hero";
 import { Manifest } from "@/components/home/manifest";
 import { PassesTrack } from "@/components/home/passes-track";
 import { TestDay } from "@/components/home/test-day";
+import { WhatsNew } from "@/components/home/whats-new";
 import { Reviews } from "@/components/home/reviews";
 import { Bubble, RevealText, Rise } from "@/components/motion/reveal";
 import { Button, Container, Label, Pill } from "@/components/ui";
@@ -136,6 +137,8 @@ export default function Home() {
       </section>
 
       <TestDay />
+
+      <WhatsNew />
 
       <PassesTrack items={passes.slice(0, 8)} />
 
